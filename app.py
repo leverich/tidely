@@ -12,9 +12,7 @@ import re
 from time import strftime, strptime, time, localtime, mktime
 import urllib
 import web
-
-# Expects template to be named "*.html".
-# from web.contrib.template import render_jinja
+from web.contrib.template import render_jinja
 
 import xtide
 
@@ -25,17 +23,6 @@ urls = (
     '/site', 'site',
     '/graph', 'graph',
 )
-
-class render_jinja:
-    def __init__(self, *a, **kwargs):
-        from jinja2 import Environment,FileSystemLoader
-        self._lookup = Environment(loader=FileSystemLoader(*a, **kwargs),
-                                   trim_blocks = True, lstrip_blocks = True)
-
-    def __getattr__(self, name):
-        path = name + '.djhtml'
-        t = self._lookup.get_template(path)
-        return t.render
 
 render = render_jinja('templates')
 
