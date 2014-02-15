@@ -1,0 +1,15 @@
+<div class="box {{box['color']}}" onclick="location.href='{{box['site_url']}}';" style="cursor: pointer">
+  <div class="gloss"></div>
+  <div class="tag">{{box['tag']}}</div>
+  {% if 'bars' in box %}
+    <div class="bar">
+      {% for bar in box['bars'] %}
+        <div class="subbar {{bar['color']}}{{bar['first']}}{{bar['last']}}"
+             style="width: {{bar['width']}}px; left: {{bar['left']}}px;"></div>
+      {% endfor %}
+      {% if 'now' in box %}
+        <div class="now" style="left: {{box['now']}}px;"></div>
+      {% endif %}
+    </div>
+  {% endif %}
+</div>

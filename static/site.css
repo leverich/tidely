@@ -1,0 +1,66 @@
+body {
+    margin: 0px;
+    padding-bottom: 30px;
+    background: #000;
+    font-family: sans-serif;
+    color: #fff;
+}
+
+a:link { color:#AAAAFF; }
+a:visited { color:#FFAAFF; }
+a:active { color:#FFFFFF; }
+
+.heading {
+    font-size: 50px;
+    text-align: center;
+    width: 640px;
+    font-variant: small-caps;
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 5px;
+}
+
+table.tidetable {
+    font-size: 30px;
+    font-weight: bold;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding-bottom: 10px;    
+}
+
+.tidetable td {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+tr.red { color: #f44; }
+tr.green { color: #4f4; }
+
+td.time  { text-align: right; }
+td.level { text-align: right; }
+
+.graph { margin-bottom: 10px; }
+
+img.block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.days {
+    width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    clear: both;
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.days .part {
+    width: 30%;
+    display: inline-block;
+}

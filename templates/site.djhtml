@@ -1,0 +1,89 @@
+<html>
+<head>
+  <title>Bay Area Tides</title>
+  <meta name="viewport" content="width=640px, initial-scale=0.5" />
+  <link rel="stylesheet" type="text/css" href="static/site.css" />
+</head>
+<body>
+
+  <div class="heading">{{ name }}</div>
+
+  <!-- Tide tables -->
+  <table class="tidetable">
+    {% if tide_spans is defined %}
+      {% for span in tide_spans %}
+        <tr class="{{"green" if span['state'] == 1 else "red"}}">
+          <td class="time">
+            {{ "&lt; " if span['first'] else "" }} {{ span['start'] }}
+          </td>
+          <td class="time">
+            {{ "&gt; " if span['last'] else "" }} {{ span['end'] }}
+          </td>
+          <td> {{ "Safe" if span['state'] == 1 else "Too low" }} </td>
+        </tr>
+        {% if 'now' in span %}
+          <tr class="{{"green" if span['state'] == 1 else "red"}}">
+            <td class="time"> {{ span['now'][1] }} </td>
+            <td class="time"> {{ span['now'][0] }} ft </td>
+            <td> {{ span['now_tag'] }} </td>
+          </tr>    
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if tide_spans is defined and current_spans is defined %}
+      <tr><td height=20></td></tr>
+    {% endif %}
+    {% if current_spans is defined %}
+      {% for span in current_spans %}
+        <tr class="{{"green" if span['state'] == 0 else "red"}}">
+          <td class="time">
+            {{ "&lt; " if span['first'] else "" }} {{ span['start'] }}
+          </td>
+          <td class="time">
+            {{ "&gt; " if span['last'] else "" }} {{ span['end'] }}
+          </td>
+          <td> {{ "Flood" if span['state'] == 1 else "Ebb" }} </td>
+        </tr>
+        {% if 'now' in span %}
+          <tr class="{{"green" if span['state'] == 0 else "red"}}">
+            <td class="time"> {{ span['now'][1] }} </td>
+            <td class="time"> {{ span['now'][0] }} kts </td>
+            <td> {{ span['now_tag'] }} </td>
+          </tr>    
+        {% endif %}
+        {% if 'maximum' in span and span['state'] == 0 %}
+          <tr class="{{"green" if span['state'] == 0 else "red"}}">
+            <td class="time"> {{ span['maximum'][1] }} </td>
+            <td class="time"> {{ span['maximum'][0] }} kts </td>
+            <td> Max Ebb </td>
+          </tr>    
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  </table>
+
+  <!-- Navigation links -->
+  <div style="text-align: center">{{ this_day }}</div>
+
+  <div class="days">
+    <div class="part">
+      <a href="{{url_notime + '&time=' + time_yesterday}}">{{date_yesterday}}</a>
+    </div>
+    <div class="part"><a href="{{url_notime}}">Today</a></div>
+    <div class="part">
+      <a href="{{url_notime + '&time=' + time_tomorrow}}">{{date_tomorrow}}</a>
+    </div>
+    <div style="margin-top: 15px"><a href="{{back_url}}/">Back</a></div>
+  </div>
+
+  <!-- Graphs -->
+  {% if tide_spans is defined %}
+    <div class="graph"><img class="block" src="{{graph_path + '&site=' + tide_site}}" /></div>
+  {% endif %}
+
+  {% if current_spans is defined %}
+    <div class="graph"><img class="block" src="{{graph_path + '&site=' + current_site}}" /></div>
+  {% endif %}
+
+</body>
+</html>

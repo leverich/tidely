@@ -1,0 +1,284 @@
+<html>
+  <head>
+    <style>
+    </style>
+  </head>
+
+  <body>
+
+    <h1>Discussion of XTide</h1>
+
+    <h2>XTide</h2>
+    <p>
+      I compute tides
+      using <a href="http://www.flaterco.com/xtide/">XTide</a>.  XTide
+      is the most popular open-source tide calculator available, and
+      is used by
+      iWindsurf, <a href="http://tides.mobilegeographics.com/">http://tides.mobilegeographics.com/</a>,
+      and various other outfits.
+    </p>
+
+    <p>
+      The principle challenge with using XTide is the provenance of
+      the data used to compute tides and currents for spots around the
+      Bay Area.  David Flater publishes a harmonic database at the
+      XTide website based on data from the National Ocean Service.
+    </p>
+
+    <p>
+      Unfortunately, the latest database does not include predictions
+      for two noteworthy spots: "Treasure Island .5 mi N" and "Sherman
+      Island (east)".  Predictions for the Treasure Island spot, which
+      is very near the boat ramp at the north end of the island, and
+      Sherman Island are available on iWindsurf.com.  It turns out,
+      these sites were included by David Flaters database up until at
+      least 2004/11/07, but not in the last several years.
+    </p>
+
+    <h2>2004/11/07 vs. 2012/03/02</h2>
+
+    <p>
+      We are left with a situation where we can't use the latest data
+      from the National Ocean Service, since it doesn't contain
+      predictions for two important sites.
+    </p>
+
+    <p>
+      This isn't quite true, however.  We could use the new database
+      for most of the sites and use the old database for the two
+      missing sites.  The real concern here is the <i>provenance</i>
+      of the TI and Sherman Island predictions, and whether
+      predictions for other important sites are significantly
+      different between the 2012 and 2004 databases.  If they are
+      different, where the hell is this data coming from?  Which
+      dataset should we believe, and which gives us the fewest
+      surprises?
+    </p>
+
+    <p>
+      Of particular concern is the amount of common lore out there
+      (i.e. 4 feet of water is enough at Palo Alto) based on iWindsurf
+      predictions (which are, evidently, based on the 2004 database).
+      If we were to upgrade to new data, would it cause frustration
+      even if it were more accurate?
+    </p>
+
+    <h2>Treasure Island .5 mi N.</h2>
+
+    <p>
+      So let's try to understand what this "TI .5 mi N" prediction is.
+      First, it's listed as a "subordinate" station by XTide.  This
+      means that its prediction is interpolated from another site in
+      XTide's station database.  Looking at the 2004 database, we find
+      the following subordinate station:</p>
+
+    <p><pre>&lt;subordinatestation name="Treasure Island .5 mi N, San Francisco Bay, California Current"
+   latitude="37.8333"
+   longitude="-122.3666"
+   timezone=":America/Los_Angeles"
+   country="United States"
+   source="local tide tables via Walt Bilofsky"
+   restriction="Public Domain"
+   reference="San Francisco Bay Entrance (Golden Gate), California
+   Current"&gt;
+&lt;offsets&gt;
+   &lt;max&gt;
+      &lt;timeadd value="-00:47"/&gt;
+      &lt;levelmultiply value="0.400"/&gt;
+   &lt;/max&gt;&lt;min&gt;
+      &lt;timeadd value="-00:36"/&gt;
+      &lt;levelmultiply value="0.400"/&gt;
+   &lt;/min&gt;
+   &lt;!-- Slack offsets are only of the timeadd variety. --&gt;
+   &lt;floodbegins value="-01:12"/&gt;
+   &lt;ebbbegins value="-00:45"/&gt;
+&lt;/offsets&gt;
+&lt;/subordinatestation&gt;</pre></p>
+
+    <p>
+      In general, to interpolate the tide or current for a site, a
+      subordinate station is assigned a reference station, and an
+      offsets for the times of "max ebb", "max flood", "slack before
+      ebb", "slack before flood", and scaling factors for ebb and
+      flood rate are given.  I suppose it does a linear interpolation
+      or some other simple function to given continuous predictions
+      thereafter.
+    </p>
+
+    <p>Look carefully at the "source" field.  "local tide tables via
+    Walt Bilofsky"??  Who the fuck is that?  And how did he compute
+    this data?  This right is here exactly what I mean by "provenance"
+    of data in the XTide database.  Also, its understandable why this
+    station was removed from XTide's newer databases.</p>
+
+    <p>
+      Despite David Flater's newest database not listing site, it does
+      seem to appear on NOAA's "Tide and Currents" page.  It's listed
+      as <a href="http://tidesandcurrents.noaa.gov/get_predc.shtml?year=2012&stn=6140+Oakland&secstn=Treasure+Island,+0.5+mile+north+of&sbfh=%2B0&sbfm=31&fldh=%2B0&fldm=02&sbeh=%2B0&sbem=22&ebbh=%2B0&ebbm=42&fldr=0.8&ebbr=0.9&fldavgd=118&ebbavgd=304&footnote=">Treasure
+      Island, 0.5 mile north of</a>.  The latitude and longitude for
+      TI in the 2004 database is 37.8333, -122.3666, while in the NOAA
+      database it is 37.8405, -122.3683.  These coordinates are
+      approximately 0.5 miles from eachother.  The NOAA coordinate is
+      indeed NNE of the boat ramp, and effectively north of the
+      island.  The XTide coordinate is more ENE of the boat ramp.
+    </p>
+
+    <p>If you look at the URL for this page, it gives all of the
+    offset/scaling factors and a reference station the prediction is
+    taken from.
+      <ul>
+        <li>stn=6140 Oakland (<i>somewhere near Yerba Buena Island</i>)</li>
+        <li>sbfh=0, sbfm=31 (0h31m offset to slack before flood)</li>
+        <li>fldh=0, fldm=02 (0h02m offset for peak flood)</li>
+        <li>sbeh=0, sbem=22 (0h22m offset to slack before ebb)</li>
+        <li>ebbh=0, ebbm=42 (0h42m offset for peak ebb)</li>
+        <li>fldr=0.8 (scale for flood magnitude)</li>
+        <li>ebbr=0.9 (scale for ebb magnitude)</li>
+      </ul>
+    </p>
+
+    <p>Let's compare the predictions given by XTide and NOAA:</p>
+
+    <table border=1><tr>
+        <th>XTide</th><th>NOAA</th>
+        </tr><tr>
+        <td>
+          <pre>2012-05-28 12:39 AM PDT   0.00 knots  Slack, Flood Begins
+2012-05-28  3:36 AM PDT   0.65 knots  Max Flood
+2012-05-28  6:19 AM PDT  -0.00 knots  Slack, Ebb Begins
+2012-05-28  9:42 AM PDT  -1.26 knots  Max Ebb
+2012-05-28 12:39 PM PDT   0.00 knots  Slack, Flood Begins
+2012-05-28  4:16 PM PDT   1.14 knots  Max Flood
+2012-05-28  7:42 PM PDT  -0.00 knots  Slack, Ebb Begins
+2012-05-28 10:30 PM PDT  -1.14 knots  Max Ebb</pre>
+        </td>
+        <td>
+          <pre>12:37 AM   Slack
+03:05 AM   0.9 Max Flood
+06:17 AM   Slack
+09:24 AM  -1.2 Max Ebb
+12:09 PM   Slack
+03:42 PM   1.2 Max Flood
+07:48 PM   Slack
+10:28 PM  -1.1 Max Ebb</pre>
+        </td>
+    </tr></table>
+
+    <p>
+      Obviously, there are some big differences.  The times skewed by
+      up to 34 minutes, and the magnitudes are off by up to 30% or
+      so.
+    </p>
+
+    <p>
+      More distressingly, the offsets for "Max Ebb" aren't constant.
+      This means that these two predictions are probably using
+      different reference stations, which indeed have different
+      timings for "Max Ebb".  Notice that the XTide subordinate
+      station is based on the San Francisco Bay Entrance, whereas the
+      NOAA one is based on Yerba Buena!
+    </p>
+
+    <p>Which one is correct?</p>
+
+    <h2>Palo Alto and Sherman Island</h2>
+
+    <p>
+      The provenance of Palo Alto and Sherman Island data are even
+      more questionable.  These stations are listed as "Reference"
+      stations in the 2004 XTide database.  Here are the comments that
+      accompany them:
+    </p>
+
+    <pre># This entry was converted automatically from a CUR file
+# that I found laying around on the net, 9/25/95.
+#
+# Sherman Island East, 0.2 mile north of-- 38d03.52N --
+                                -- 000d00. 'W--(SHERMANI.CUR)
+
+# This entry was converted automatically from a TID file
+# that I found laying around on the net, 9/6/95.
+#
+# Palo Alto Yacht Harbor------ 37d27. 'N 122d06. 'W--(PALOALTO.TID)</pre>
+
+    <p>
+      Can we trust these measurements?  Or should we use predictions
+      by NOAA
+      (<a href="http://tidesandcurrents.noaa.gov/get_predc.shtml?year=2012&stn=6529+Benicia%20Bridge&secstn=Sherman+Island+East,+0.2+mile+north+of&sbfh=%2B1&sbfm=22&fldh=%2B1&fldm=12&sbeh=%2B1&sbem=23&ebbh=%2B0&ebbm=29&fldr=0.7&ebbr=0.8&fldavgd=094&ebbavgd=270&footnote=">Sherman</a>,
+      <a href="http://tidesandcurrents.noaa.gov/noaatidepredictions/NOAATidesFacade.jsp?Stationid=9414525">Palo
+      Alto</a>)?
+    </p>
+
+    <table border=1><tr>
+        <th>XTide</th><th>NOAA</th>
+        </tr><tr>
+        <td><pre>2012-05-28  1:21 AM PDT  -0.80 knots  Max Ebb
+2012-05-28  4:42 AM PDT   0.00 knots  Slack, Flood Begins
+2012-05-28  7:29 AM PDT   0.68 knots  Max Flood
+2012-05-28 10:08 AM PDT  -0.00 knots  Slack, Ebb Begins
+2012-05-28  1:10 PM PDT  -1.31 knots  Max Ebb
+2012-05-28  4:44 PM PDT   0.00 knots  Slack, Flood Begins
+2012-05-28  8:17 PM PDT   1.10 knots  Max Flood
+2012-05-28 11:36 PM PDT  -0.00 knots  Slack, Ebb Begins</pre>
+        </td>
+        <td><pre>01:19 AM  -0.9 Max Ebb
+05:16 AM   Slack
+07:25 AM   0.7 Max Flood
+10:17 AM   Slack
+12:47 PM  -1.4 Max Ebb
+05:20 PM   Slack
+08:17 PM   1.1 Max Flood
+12:07 AM   Slack</pre>
+        </td>
+    </tr></table>
+
+    <p>
+      In order to use the NOAA Sherman Island prediction, we'll need
+      to get the constituents for the reference station it uses
+      (Benicia Bridge?).
+    </p>
+  </body>
+</html>
+
+<!--
+http://pubs.usgs.gov/wri/wri014086/Appendixes_A-G.pdf
+
+Table B3. Harmonic analysis results for velocity, Station BEN, May 20 --
+  --through October 31, 1995, BIN 9 near-surface 
+BIN, Suisun Bay, California 
+[BIN refers to a discrete measurement location in the vertical; cm/s, --
+  --centimeter per second; deg. T, degrees true; deg, degrees; 
+E, equilibrium argument] 
+BIN number:  9
+Station: BEN 
+Start time of the series (local time): Year, 1995; Month, 5; Day,31; --
+  --Hour,16: 3
+Time meridian: 120 W
+Station position: 38 237N 122 725W
+Record length: 352  M2 cycles: 21861 data points
+Tidal  Major axis  Minor axis  Direction  Phase  E  Rotation
+Symbol  (CM/S)  (CM/S)  (deg. T)  (deg)  (deg)
+Q1  2.86  0.22  41.7  95.0  178.3  Counterclockwise
+O1  5.60  0.24  45.8  115.7  18.6  Counterclockwise
+M1  1.16  0.37  27.9  293.9  225.8  Clockwise
+P1  8.52  0.03  39.0  98.6  82.2  Counterclockwise
+K1  20.97  0.97  40.9  95.9  45.0  Counterclockwise
+J1  2.19  0.30  28.7  327.5  248.1  Clockwise
+MU2  4.10  1.00  43.6  281.2  10.0  Clockwise
+N2  4.94  0.26  48.9  354.3  226.1  Counterclockwise
+NU2  11.37  0.37  38.4  33.6  210.2  Counterclockwise
+M2  51.42  0.26  39.1  9.1  66.4  Counterclockwise
+L2  7.47  0.08  32.2  67.4  86.1  Counterclockwise
+T2  2.34  0.01  23.5  228.2  336.0  Counterclockwise
+S2  11.29  0.33  41.7  9.6  121.8  Clockwise
+K2  2.65  0.15  41.0  343.4  269.2  Counterclockwise
+M4  0.94  0.51  168.3  186.5  132.9  Clockwise
+MK3  3.71  0.60  45.9  173.5  111.5  Clockwise
+Root-mean-square speed (cm/s):  51.19
+Standard deviation, U series (cm/s):  17.85
+Standard deviation, V series (cm/s):  21.50
+Tidal form number:  0.42
+Spring-tidal current maximum (cm/s):  89.28
+Neap-tidal current maximum (cm/s):  24.76
+Pricipal current direction (deg. T):  40.29
+-->

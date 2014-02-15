@@ -1,0 +1,32 @@
+<html>
+<head>
+  <title>Bay Area Tides</title>
+  <meta name="viewport" content="width=320px, initial-scale=1">
+  <!--<link rel="icon" type="image/png" href="/favicon.png">-->
+  <link rel="stylesheet" type="text/css" href="static/tides.css" />
+</head>
+<body>
+
+<div class="boxes">
+  {% for box in boxes %}
+{{ box }}
+  {% endfor %}
+</div>
+
+<div style="text-align: center">{{ this_day }}</div>
+<div class="foot">
+  <div class="part"><a href="?time={{time_yesterday}}">{{date_yesterday}}</a></div>
+  <div class="part"><a href="?">Today</a></div>
+  <div class="part"><a href="?time={{time_tomorrow}}">{{date_tomorrow}}</a></div>
+
+  <div style="margin-top: 15px;">
+    <a href="static/help.html">Help</a>
+  </div>
+
+  <div style="margin-top: 15px;">
+    <a href="static/notes.html">Notes</a>
+  </div>
+</div>
+
+</body>
+</html>
