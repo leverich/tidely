@@ -4,9 +4,13 @@ import os
 import re
 #from gevent.subprocess import Popen, PIPE
 from subprocess import Popen, PIPE
+import sys
 import time
 
-def run_xtide(site_name, start_time = None, stop_time = None, tcd_file = None):
+curdir = os.path.dirname(__file__)
+default_tcd = curdir + "/tcd/harmonics-2004-rebuild.tcd"
+
+def run_xtide(site_name, start_time = None, stop_time = None, tcd_file = default_tcd):
     """Run XTide's command-line tool to compute tide magnitudes for each
     minute between start_time and stop_time.
 
