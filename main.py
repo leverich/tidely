@@ -1,9 +1,11 @@
 #!/usr/bin/env python
-from gevent import monkey
-monkey.patch_all(subprocess=True)
 
-from gevent import wsgi
+import os
+import sys
 import web
+
+curdir = os.path.dirname(__file__)
+if curdir not in sys.path: sys.path.append(curdir)
 
 import index
 import graph
@@ -15,10 +17,12 @@ urls = (
     '/', 'index.index',
 )
 
-app = web.application(urls, globals()).wsgifunc()
-app = web.httpserver.StaticMiddleware(app)
+application = web.application(urls, globals()).wsgifunc()
+application = web.httpserver.StaticMiddleware(application)
 
 if __name__ == "__main__":
     #web.application(urls, globals()).run()
-    http_server = wsgi.WSGIServer(('', 8080), app)
+    from gevent import wsgi, monkey
+    monkey.patch_all(subprocess=True)
+    http_server = wsgi.WSGIServer(('', 8080), application)
     http_server.serve_forever()

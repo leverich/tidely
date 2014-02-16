@@ -1,14 +1,19 @@
 #!/usr/bin/env python
 
+import os
 import re
+import sys
 from time import strftime, strptime, time, localtime, mktime
 import urllib
 import web
 from web.contrib.template import render_jinja
 
+curdir = os.path.dirname(__file__)
+if curdir not in sys.path: sys.path.append(curdir)
+
 import xtide
 
-render = render_jinja('templates')
+render = render_jinja(curdir + '/templates')
 
 def green_red_yellow(tide_site, current_site, state):
     if tide_site and current_site:
@@ -27,7 +32,8 @@ def box(tide_site = None, current_site = None, tag = None,
     stop_time = mktime(strptime(strftime("%Y-%m-%d 18:00", localtime(this_time)), "%Y-%m-%d %H:%M"))
 
     thebox = {
-        "site_url": '/site?time=%f&%s%s%s%s' % (
+        "site_url": '%s/site?time=%f%s%s%s%s' % (
+            web.ctx.home,
             this_time,
             "&name=%s" % urllib.quote(name) if name else "",
             "&current_site=%s" % urllib.quote(current_site) if current_site else "",

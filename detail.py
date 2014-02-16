@@ -1,19 +1,21 @@
 #!/usr/bin/env python
 
-from gevent import monkey
-monkey.patch_all(subprocess=True)
-
 from astral import Astral
 import datetime
+import os
 import re
+import sys
 from time import strftime, strptime, time, localtime, mktime
 import urllib
 import web
 from web.contrib.template import render_jinja
 
+curdir = os.path.dirname(__file__)
+if curdir not in sys.path: sys.path.append(curdir)
+
 import xtide
 
-render = render_jinja('templates')
+render = render_jinja(curdir + '/templates')
 
 def format_time(seconds):
     return strftime("%l:%M %p", localtime(seconds))
@@ -81,8 +83,8 @@ class detail:
 
         kwargs.update({
             "this_day": strftime("%a %h %e", localtime(this_time)),
-            "back_url": web.ctx.homepath,
-            "url_notime": web.ctx.path + re.sub('&?time=[^&;]+', '',
+            "back_url": web.ctx.home,
+            "url_notime": web.ctx.home + web.ctx.path + re.sub('&?time=[^&;]+', '',
                                                 web.ctx.query),
             "time_yesterday": str(this_time - 86400),
             "date_yesterday": strftime(

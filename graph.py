@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 
+import os
+import sys
 import web
+
+curdir = os.path.dirname(__file__)
+if curdir not in sys.path: sys.path.append(curdir)
+
 import xtide
 
 class graph:
@@ -14,4 +20,3 @@ class graph:
         web.header('Content-Type', 'image/png')
         g = xtide.xtide_graph(i.site, start_time = start_time)
         return g
-
