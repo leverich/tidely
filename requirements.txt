@@ -1,0 +1,6 @@
+Jinja2==2.7.2
+astral==0.7.3
+gevent==1.0
+greenlet==0.4.2
+python-dateutil==2.1
+web.py==0.37
