@@ -166,7 +166,7 @@ def target_spans(levels, target = 0.0, levels2 = None, target2 = 0.0,
                            now_buffer, max_buffer))
     return spans
 
-def xtide_graph(site_name, start_time = None, tcd_file = None):
+def xtide_graph(site_name, start_time = None, tcd_file = default_tcd):
     site_name_clean = re.sub('[^A-Za-z0-9()., ]', '', site_name[0:100])
     if site_name != site_name_clean: raise Exception("INVALID_SITE")
     if start_time is None: start_time = time.time()
