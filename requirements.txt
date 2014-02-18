@@ -1,7 +1,6 @@
 Jinja2
 astral
-gevent
-greenlet
 python-dateutil
+pytz
 web.py
 WebTest

@@ -32,8 +32,7 @@ def box(tide_site = None, current_site = None, tag = None,
     stop_time = mktime(strptime(strftime("%Y-%m-%d 18:00", localtime(this_time)), "%Y-%m-%d %H:%M"))
 
     thebox = {
-        "site_url": '%s/site?time=%f%s%s%s%s' % (
-            web.ctx.home,
+        "site_url": 'site?time=%f%s%s%s%s' % (
             this_time,
             "&name=%s" % urllib.quote(name) if name else "",
             "&current_site=%s" % urllib.quote(current_site) if current_site else "",
@@ -117,8 +116,6 @@ class index:
         kwargs = {
             "boxes": boxes,
             "this_day": strftime("%a %h %e", localtime(this_time)),
-            "url_notime": web.ctx.path + re.sub('&?time=[^&;]+', '',
-                                                web.ctx.query),
             "time_yesterday": str(this_time - 86400),
             "date_yesterday": strftime(
                 "%a %h %e", localtime(this_time - 86400)),

@@ -84,15 +84,14 @@ class detail:
         kwargs.update({
             "this_day": strftime("%a %h %e", localtime(this_time)),
             "back_url": web.ctx.home,
-            "url_notime": web.ctx.home + web.ctx.path + re.sub('&?time=[^&;]+', '',
-                                                web.ctx.query),
+            "url_notime": re.sub('([&?])time=[^&]+', r'\1', web.ctx.query)
             "time_yesterday": str(this_time - 86400),
             "date_yesterday": strftime(
                 "%a %h %e", localtime(this_time - 86400)),
             "time_tomorrow": str(this_time + 86400),
             "date_tomorrow": strftime(
                 "%a %h %e", localtime(this_time + 86400)),
-            "graph_path": (web.ctx.homepath + '/graph?time=' + str(this_time))
+            "graph_path": ('graph?time=' + str(this_time))
         })
 
         return render.site(**kwargs)
