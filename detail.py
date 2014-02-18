@@ -81,10 +81,12 @@ class detail:
         if "current_site" in i:
             kwargs["current_spans"] = get_spans(i.current_site, current = True, start_time = start_time, stop_time = stop_time)
 
+        url_notime = '?' + '&'.join([f for f in web.ctx.query[1:].split('&') if f[0:4] != 'time'])
+
         kwargs.update({
             "this_day": strftime("%a %h %e", localtime(this_time)),
             "back_url": web.ctx.homepath,
-            "url_notime": re.sub('([&?])time=[^&]+&?', r'\1', web.ctx.query),
+            "url_notime": url_notime,
             "time_yesterday": str(this_time - 86400),
             "date_yesterday": strftime(
                 "%a %h %e", localtime(this_time - 86400)),
