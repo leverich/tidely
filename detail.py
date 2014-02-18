@@ -83,8 +83,8 @@ class detail:
 
         kwargs.update({
             "this_day": strftime("%a %h %e", localtime(this_time)),
-            "back_url": web.ctx.home,
-            "url_notime": re.sub('([&?])time=[^&]+', r'\1', web.ctx.query),
+            "back_url": web.ctx.homepath,
+            "url_notime": re.sub('([&?])time=[^&]+&?', r'\1', web.ctx.query),
             "time_yesterday": str(this_time - 86400),
             "date_yesterday": strftime(
                 "%a %h %e", localtime(this_time - 86400)),
