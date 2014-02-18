@@ -21,8 +21,8 @@ application = web.application(urls, globals()).wsgifunc()
 application = web.httpserver.StaticMiddleware(application)
 
 if __name__ == "__main__":
-    #web.application(urls, globals()).run()
-    from gevent import wsgi, monkey
-    monkey.patch_all(subprocess=True)
-    http_server = wsgi.WSGIServer(('', 8080), application)
-    http_server.serve_forever()
+    web.application(urls, globals()).run()
+    #from gevent import wsgi, monkey
+    #monkey.patch_all(subprocess=True)
+    #http_server = wsgi.WSGIServer(('', 8080), application)
+    #http_server.serve_forever()
