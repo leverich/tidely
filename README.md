@@ -13,7 +13,7 @@ Ubuntu
 
     git clone https://github.com/leverich/tidely.git
     cd tidely
-    sudo apt-get install python-pip python-devel xtide
+    sudo apt-get install python-pip xtide
     sudo pip install -r requirements.txt
     python -m unittest discover
 
@@ -22,7 +22,7 @@ OS X
 
     git clone https://github.com/leverich/tidely.git
     cd tidely
-    sudo port install xtide
+    sudo port install py-pip xtide
     sudo pip install -r requirements.txt
     python -m unittest discover
 
