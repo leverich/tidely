@@ -38,18 +38,18 @@ Host with Apache
 
 Add the following to /etc/apache2/sites-enabled/tidely.conf:
 
-   <Directory /path/to/tidely>
-       Order allow,deny
-       Allow from all
-   </Directory>
-   
-   <IfModule mod_wsgi.c>
-       RedirectMatch ^/tidely$ /tidely/
-       WSGIScriptAlias /tidely /path/to/tidely/main.py
-       Alias /tidely/static /path/to/tidely/static/
-       AddType text/html .py
-   </IfModule>
+    <Directory /path/to/tidely>
+        Order allow,deny
+        Allow from all
+    </Directory>
+    
+    <IfModule mod_wsgi.c>
+        RedirectMatch ^/tidely$ /tidely/
+        WSGIScriptAlias /tidely /path/to/tidely/main.py
+        Alias /tidely/static /path/to/tidely/static/
+        AddType text/html .py
+    </IfModule>
 
 Then reload apache:
 
-   apache2ctl graceful
+    apache2ctl graceful
