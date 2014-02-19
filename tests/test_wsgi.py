@@ -15,8 +15,8 @@ class TestTidelyWSGI(unittest.TestCase):
         self.assertEquals(response.status_int, 200)
         self.assertTrue('box' in response)
 
-    def test_tidely_site(self):
-        response = self.app.get('/site?current_site=San+Francisco+Bay+Entrance')
+    def test_tidely_detail(self):
+        response = self.app.get('/detail?current_site=San+Francisco+Bay+Entrance')
         self.assertEquals(response.status_int, 200)
         self.assertTrue('tidetable' in response)
 

@@ -12,7 +12,7 @@ import graph
 import detail
 
 urls = (
-    '/site', 'detail.detail',
+    '/detail', 'detail.detail',
     '/graph', 'graph.graph',
     '/', 'index.index',
 )

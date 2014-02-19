@@ -32,7 +32,7 @@ def box(tide_site = None, current_site = None, tag = None,
     stop_time = mktime(strptime(strftime("%Y-%m-%d 18:00", localtime(this_time)), "%Y-%m-%d %H:%M"))
 
     thebox = {
-        "site_url": 'site?time=%f%s%s%s%s' % (
+        "site_url": 'detail?time=%f%s%s%s%s' % (
             this_time,
             "&name=%s" % urllib.quote(name) if name else "",
             "&current_site=%s" % urllib.quote(current_site) if current_site else "",
@@ -124,5 +124,5 @@ class index:
                 "%a %h %e", localtime(this_time + 86400)),
         }
         
-        return render.tides(**kwargs)
+        return render.index(**kwargs)
 

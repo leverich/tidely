@@ -96,5 +96,5 @@ class detail:
             "graph_path": ('graph?time=' + str(this_time))
         })
 
-        return render.site(**kwargs)
+        return render.detail(**kwargs)
 
