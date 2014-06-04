@@ -1,4 +1,13 @@
 #!/usr/bin/env python
+#
+#  This
+#   file
+#    is
+#     not
+#      used
+#
+#  It's just sitting around in case I ever make an xtide JSON service.
+#
 
 from cgi import parse_qs
 import gevent
