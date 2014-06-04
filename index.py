@@ -77,7 +77,7 @@ def box(tide_site = None, current_site = None, tag = None,
 
         bars.append(bar)
         bars[0]['first'] = ' first'
-        bars[len(bars)-1]['last'] = ' last'
+    bars[len(bars)-1]['last'] = ' last'
 
     if len(spans) > 1 or thebox['color'] == "yellow":
         thebox['bars'] = bars
