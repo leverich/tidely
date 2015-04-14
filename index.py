@@ -17,13 +17,9 @@ render = render_jinja(curdir + '/templates')
 
 def green_red_yellow(tide_site, current_site, state):
     if tide_site and current_site:
-        if not (state & 1): return "red"
-        if not (state & 2): return "yellow"
-        return "green"
-
-        # if state == 0: return "red"
-        # if state == 1: return "green"
-        # return "yellow"
+        if state == 0 or state == 2: return "red"
+        if state == 1: return "green"
+        return "yellow"
     if tide_site:
         return "green" if state else "red"
     if current_site:
